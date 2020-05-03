@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.JobDao'>
+
+<update id="updateSinkronJobInfo" parameterType="map">
+	update scheduler_job_info set action_type = #{action_type},automatic = #{automatic} where id = #{id}
+</update>
+  
+<update id="updateJobInfoTime" parameterType="map">
+	update scheduler_job_info set scheduleTime = #{schedule_time},nextFireTime = #{next_fire_time},lastFireTime = #{last_fire_time},state=#{state} where id = #{id}
+</update>
+  
+
+  
+</mapper>
