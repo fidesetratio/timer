@@ -79,6 +79,7 @@ public class CustomListeners implements TriggerListener {
 		}
 		jobInfoLog.setJob_result(job_result);
 		jobServices.insertJobHistoryLog(jobInfoLog);
+		System.out.println("info id="+jobInfoLog.getInfo_id());
 		setNextTime(jobId, jobKey);
 		
 		
@@ -113,10 +114,10 @@ public class CustomListeners implements TriggerListener {
 		  
 		  
 		  
-		   Date scheduleTime = triggers.get(0).getStartTime();
+		  Date scheduleTime = triggers.get(0).getStartTime();
 		  Date nextFireTime = triggers.get(0).getNextFireTime(); 
 		  Date lastFiredTime =triggers.get(0).getPreviousFireTime();
-		  jobServices.updateJobInfoTime(scheduleTime.toString(),nextFireTime.toString(),lastFiredTime.toString(),state,jobId);
+		  jobServices.updateJobInfoTime(1,scheduleTime.toString(),nextFireTime.toString(),lastFiredTime.toString(),state,jobId);
 		
 		  
 		  

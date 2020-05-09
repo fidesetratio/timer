@@ -4,7 +4,7 @@
 <mapper namespace='com.app.dao.JobDao'>
 
 <select id="selectAll" resultType="com.app.model.SchedulerJobInfo">
-	select * from scheduler_job_info
+	select * from scheduler_job_info where status_job = 1
 </select>
   
 <select id="selectJobById" resultType="com.app.model.SchedulerJobInfo" parameterType="long">

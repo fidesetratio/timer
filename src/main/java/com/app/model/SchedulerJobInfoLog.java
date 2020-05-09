@@ -1,6 +1,10 @@
 package com.app.model;
 
 public class SchedulerJobInfoLog {
+	
+
+
+	private Long info_id;
 	private Long id;
 
     private String job_name;
@@ -138,5 +142,13 @@ public class SchedulerJobInfoLog {
 
 		public void setUrl(String url) {
 			this.url = url;
+		}
+		
+		public Long getInfo_id() {
+			return info_id;
+		}
+
+		public void setInfo_id(Long info_id) {
+			this.info_id = info_id;
 		}
 }

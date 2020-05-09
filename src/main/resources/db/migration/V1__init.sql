@@ -27,10 +27,12 @@ CREATE TABLE scheduler_job_info (
   nextFireTime varchar(200) DEFAULT NULL,
   lastFireTime varchar(200) DEFAULT NULL,
   state varchar(200) DEFAULT NULL,
+  status_job int not null default 0,
   PRIMARY KEY (id)
 ) ENGINE=INNODB;
 
 CREATE TABLE scheduler_job_info_history (
+  info_id int(10) not null auto_increment,
   id bigint(20) NOT NULL,
   cron_expression varchar(255) DEFAULT NULL,
   cron_job varchar(255) DEFAULT 'Y',
@@ -43,7 +45,8 @@ CREATE TABLE scheduler_job_info_history (
   action_type int not null default 0,
   automatic int not null default 0,
   created_date date,
-  job_result text not null
+  job_result text not null,
+  primary key(info_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE QRTZ_JOB_DETAILS(

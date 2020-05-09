@@ -27,16 +27,17 @@ public class JobServices {
 		return ( List<SchedulerJobInfo>)dao.selectAllAutomatic();
 	}
 	
-	public void updateSinkronJobInfo(int action_type,int automatic, Long id){
+	public void updateSinkronJobInfo(int status_job,int action_type,int automatic, Long id){
 		JobDao dao=sqlSession.getMapper(JobDao.class);
 		Map params = new HashMap();
 		params.put("action_type",action_type);
 		params.put("automatic",automatic);
 		params.put("id",id);
+		params.put("status_job", status_job);
 		dao.updateSinkronJobInfo(params);
 		
 	}
-	public void updateJobInfoTime(String schedule_time,String next_fire_time,String last_fire_time,String state, Long id){
+	public void updateJobInfoTime(int status_job,String schedule_time,String next_fire_time,String last_fire_time,String state, Long id){
 		JobDao dao=sqlSession.getMapper(JobDao.class);
 		Map params = new HashMap();
 		params.put("schedule_time",schedule_time);
@@ -44,6 +45,7 @@ public class JobServices {
 		params.put("last_fire_time",last_fire_time);
 		params.put("state",state);
 		params.put("id",id);
+		params.put("status_job", status_job);
 		dao.updateJobInfoTime(params);
 		
 	}

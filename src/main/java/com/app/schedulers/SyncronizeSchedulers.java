@@ -26,11 +26,14 @@ public class SyncronizeSchedulers {
 		
 		for(SchedulerJobInfo j:list) {
 			
-			if(j.getAction_type() == 1) {
+			if(j.getAction_type() == 1) { // sinkronisze
 				syncronizeJobInfo(j);
 			};
-			if(j.getAction_type() == 2) {
+			if(j.getAction_type() == 2) { // delete job
 				deleteJobInfo(j);
+			};
+			if(j.getAction_type() == 3) { // stop job
+				stopJobInfo(j);
 			}
 			
 			
@@ -38,12 +41,19 @@ public class SyncronizeSchedulers {
 		
 	}
 	
+	private void stopJobInfo(SchedulerJobInfo jobInfo) {
+		// TODO Auto-generated method stub
+		schedulerServices.pauseJob(jobInfo);
+		jobServices.updateSinkronJobInfo(0,0,0, jobInfo.getId());
+		
+			
+	}
+
 	public void syncronizeJobInfo(SchedulerJobInfo jobInfo) {
 		if(schedulerServices.sinkron(jobInfo)) {
-			System.out.println("sinkkk");
-			jobServices.updateSinkronJobInfo(0,0, jobInfo.getId());
+			jobServices.updateSinkronJobInfo(1,0,0, jobInfo.getId());
 		}else {
-			jobServices.updateSinkronJobInfo(0,0, jobInfo.getId());
+			jobServices.updateSinkronJobInfo(0,0,0, jobInfo.getId());
 		}
 	
 	}
@@ -55,5 +65,6 @@ public class SyncronizeSchedulers {
 		jobServices.deleteSinkronJobInfo(jobInfo.getId());
 	
 	}
+	
 
 }

@@ -3,7 +3,7 @@
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.app.dao.JobDao'>
 
-<insert id="insertJobHistoryLog" parameterType="com.app.model.SchedulerJobInfoLog">
+<insert id="insertJobHistoryLog" parameterType="com.app.model.SchedulerJobInfoLog" useGeneratedKeys="true" keyProperty="info_id">
 	insert scheduler_job_info_history (id,cron_expression,cron_job,job_class,job_group,job_name,repeat_time,params,url,action_type,automatic,created_date,job_result)
 	values(#{id},#{cron_expression},#{cron_job},#{job_class},#{job_group},#{job_name},#{repeat_time},#{params},#{url},#{action_type},#{automatic},now(),#{job_result})
 </insert>

@@ -23,6 +23,16 @@ public class SchedulerJobInfo {
 
 	    private String url;
 	    
+	    public int getStatus_job() {
+			return status_job;
+		}
+
+		public void setStatus_job(int status_job) {
+			this.status_job = status_job;
+		}
+
+		private int status_job;
+	    
 	    
 		public String getParams() {
 			return params;

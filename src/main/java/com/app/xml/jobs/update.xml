@@ -4,11 +4,11 @@
 <mapper namespace='com.app.dao.JobDao'>
 
 <update id="updateSinkronJobInfo" parameterType="map">
-	update scheduler_job_info set action_type = #{action_type},automatic = #{automatic} where id = #{id}
+	update scheduler_job_info set action_type = #{action_type},automatic = #{automatic},status_job=#{status_job} where id = #{id}
 </update>
   
 <update id="updateJobInfoTime" parameterType="map">
-	update scheduler_job_info set scheduleTime = #{schedule_time},nextFireTime = #{next_fire_time},lastFireTime = #{last_fire_time},state=#{state} where id = #{id}
+	update scheduler_job_info set status_job=#{status_job},scheduleTime = #{schedule_time},nextFireTime = #{next_fire_time},lastFireTime = #{last_fire_time},state=#{state} where id = #{id}
 </update>
   
 
