@@ -28,6 +28,7 @@ CREATE TABLE scheduler_job_info (
   lastFireTime varchar(200) DEFAULT NULL,
   state varchar(200) DEFAULT NULL,
   status_job int not null default 0,
+  notification_id int not null default 0,
   PRIMARY KEY (id)
 ) ENGINE=INNODB;
 
@@ -48,6 +49,31 @@ CREATE TABLE scheduler_job_info_history (
   job_result text not null,
   primary key(info_id)
 ) ENGINE=INNODB;
+
+create table scheduler_notification_type(
+	type_id int not null auto_increment,
+	notification_type varchar(200) not null,
+	description varchar(300) not null,
+	flag_active int not null default 1,
+	primary key(type_id)
+)ENGINE=INNODB;
+
+
+create table scheduler_notification(
+	notification_id int not null auto_increment,
+	notification_type_id int not null,
+	params varchar(200) default null,
+	fromemail varchar(200) default null,
+	toemail varchar(200) default null,
+	ccemail varchar(200) default null,
+	bccemail varchar(200) default null,
+	subject_email varchar(200),
+	message varchar(300),
+	description varchar(300),
+	flag_active int not null default 1,
+	primary key(notification_id)
+)ENGINE=INNODB;
+
 
 CREATE TABLE QRTZ_JOB_DETAILS(
 SCHED_NAME VARCHAR(120) NOT NULL,
@@ -207,5 +233,24 @@ CREATE INDEX IDX_QRTZ_FT_J_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROU
 CREATE INDEX IDX_QRTZ_FT_JG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);
 CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
 CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+
+
+
+
+
+
+insert into scheduler_notification_type(
+	notification_type,
+	description,
+	flag_active
+) values('gmail','Gmail description',1);
+
+
+
+insert into scheduler_notification(notification_type_id,fromemail,toemail,subject_email,description,flag_active)
+values(1,'patartimotiustambunan@gmail.com','patartimotiustambunan@gmail','test','test',1);
+
+INSERT INTO `scheduler_job_info` (`cron_expression`, `job_class`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) VALUES ( '0 * * ? * *', 'com.app.quartz.engine.jobs.GalleryJob', 'Test_Cron', 'Sample Cron', 'Y', NULL,1,1,1);
+
 
 commit;

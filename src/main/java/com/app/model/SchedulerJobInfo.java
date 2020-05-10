@@ -23,6 +23,8 @@ public class SchedulerJobInfo {
 
 	    private String url;
 	    
+	    private Long notification_id;
+	    
 	    public int getStatus_job() {
 			return status_job;
 		}
@@ -120,6 +122,14 @@ public class SchedulerJobInfo {
 
 		public void setUrl(String url) {
 			this.url = url;
+		}
+
+		public Long getNotification_id() {
+			return notification_id;
+		}
+
+		public void setNotification_id(Long notification_id) {
+			this.notification_id = notification_id;
 		}
 
 }

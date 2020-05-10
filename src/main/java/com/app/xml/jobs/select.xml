@@ -15,5 +15,9 @@
  <select id="selectAllAutomatic" resultType="com.app.model.SchedulerJobInfo">
 	select * from scheduler_job_info where automatic = 1
 </select>
-  
+  <select id="selectNotificationId" resultType="com.app.model.SchedulerNotification" parameterType="long">
+  		select * from scheduler_notification n,scheduler_notification_type t where t.type_id = n.notification_type_id
+  		and notification_id =  #{notification_id}
+
+  </select>
 </mapper>

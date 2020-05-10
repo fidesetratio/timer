@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
+import com.app.model.SchedulerNotification;
 
 public interface JobDao {
 	
 	public List<SchedulerJobInfo> selectAll();
 	public List<SchedulerJobInfo> selectAllAutomatic();
 	public SchedulerJobInfo selectJobById(Long job_id);
+	public SchedulerNotification selectNotificationId(Long notification_id);
 	public void updateSinkronJobInfo(Map params);
 	public void updateJobInfoTime(Map params);
 	

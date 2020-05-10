@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.app.dao.JobDao;
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
+import com.app.model.SchedulerNotification;
 
 @Service
 public class JobServices {
@@ -26,6 +27,13 @@ public class JobServices {
 		JobDao dao=sqlSession.getMapper(JobDao.class);
 		return ( List<SchedulerJobInfo>)dao.selectAllAutomatic();
 	}
+	
+	public SchedulerNotification selectNotificationId(Long notification_id) {
+		JobDao dao=sqlSession.getMapper(JobDao.class);
+		return (SchedulerNotification)dao.selectNotificationId(notification_id);
+	}
+	
+	
 	
 	public void updateSinkronJobInfo(int status_job,int action_type,int automatic, Long id){
 		JobDao dao=sqlSession.getMapper(JobDao.class);

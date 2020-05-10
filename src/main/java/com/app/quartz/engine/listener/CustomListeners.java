@@ -11,12 +11,15 @@ import org.quartz.Trigger.CompletedExecutionInstruction;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
+import com.app.model.SchedulerNotification;
 import com.app.services.JobServices;
 import com.app.services.SchedulerService;
+import com.app.services.notification.NotificationServices;
 
 @Component
 public class CustomListeners implements TriggerListener {
@@ -28,6 +31,10 @@ public class CustomListeners implements TriggerListener {
 	
 	@Autowired
 	private SchedulerService schedulerService;
+	
+	@Autowired
+    private ApplicationContext applicationContext;
+
 	/*
 	 * @Autowired private SchedulerFactoryBean schedulerFactoryBean;
 	 */
@@ -81,13 +88,22 @@ public class CustomListeners implements TriggerListener {
 		jobServices.insertJobHistoryLog(jobInfoLog);
 		System.out.println("info id="+jobInfoLog.getInfo_id());
 		setNextTime(jobId, jobKey);
-		
+		setNotificationProcess(jobInfo,context);
 		
 		
 		
 		
 	}
 	
+	
+    public void setNotificationProcess(SchedulerJobInfo jobInfo,JobExecutionContext context) {
+    	SchedulerNotification notification = jobServices.selectNotificationId(jobInfo.getNotification_id());
+    	if(notification != null) {
+    		String notificationType = notification.getNotification_type()+"notification";
+    		NotificationServices notificationServices = (NotificationServices)applicationContext.getBean(notificationType);
+    		notificationServices.process(notification);
+    	}
+    }
 	
 	public void setNextTime(Long jobId, JobKey jobKey) {
 		
