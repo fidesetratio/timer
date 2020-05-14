@@ -8,10 +8,11 @@ import com.app.model.SchedulerNotification;
 public class GmailNotificationServices implements NotificationServices {
 
 	@Override
-	public void process(SchedulerNotification notification) {
+	public String process(SchedulerNotification notification) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("notification gmail type ini");
+		return "";
 		
 	}
 

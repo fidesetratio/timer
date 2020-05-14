@@ -74,6 +74,15 @@ create table scheduler_notification(
 	primary key(notification_id)
 )ENGINE=INNODB;
 
+create table scheduler_notification_history(
+	history_id int not null auto_increment,
+	notification_id int,
+	info_id  int,
+	error int,
+	message varchar(300) not null default '',
+	create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	primary key(history_id)
+)ENGINE=INNODB;
 
 CREATE TABLE QRTZ_JOB_DETAILS(
 SCHED_NAME VARCHAR(120) NOT NULL,

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
 import com.app.model.SchedulerNotification;
+import com.app.model.SchedulerNotificationHistory;
 import com.app.services.JobServices;
 import com.app.services.SchedulerService;
 import com.app.services.notification.NotificationServices;
@@ -101,7 +102,21 @@ public class CustomListeners implements TriggerListener {
     	if(notification != null) {
     		String notificationType = notification.getNotification_type()+"notification";
     		NotificationServices notificationServices = (NotificationServices)applicationContext.getBean(notificationType);
-    		notificationServices.process(notification);
+    		
+    		String message = "-";
+    		int error = 0;
+    		try {
+    			message = notificationServices.process(notification);
+    		}catch(Exception e) {
+    			message = e.getMessage();
+    			error = 1;
+    		}
+    		SchedulerNotificationHistory history = new SchedulerNotificationHistory();
+    		history.setInfo_id(jobInfo.getId());
+    		history.setNotification_id(notification.getNotification_id());
+    		history.setError(error);
+    		history.setMessage(message);
+    		jobServices.insertNotificationHistory(history);
     	}
     }
 	

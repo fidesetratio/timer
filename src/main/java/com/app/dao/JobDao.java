@@ -6,6 +6,7 @@ import java.util.Map;
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
 import com.app.model.SchedulerNotification;
+import com.app.model.SchedulerNotificationHistory;
 
 public interface JobDao {
 	
@@ -17,6 +18,7 @@ public interface JobDao {
 	public void updateJobInfoTime(Map params);
 	
 	public void insertJobHistoryLog(SchedulerJobInfoLog schedulerJobInfoLog);
+	public void insertNotificationHistory(SchedulerNotificationHistory schedulerNotificationHistory);
 	public void deleteSinkronJobInfo(Long id);
 	
 

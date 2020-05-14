@@ -7,7 +7,8 @@ import com.app.model.SchedulerNotification;
 public class TelegramNotifcationServices implements NotificationServices {
 
 	@Override
-	public void process(SchedulerNotification notification) {
+	public String process(SchedulerNotification notification) {
+		return null;
 		// TODO Auto-generated method stub
 
 	}

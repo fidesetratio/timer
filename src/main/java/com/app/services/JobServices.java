@@ -12,6 +12,7 @@ import com.app.dao.JobDao;
 import com.app.model.SchedulerJobInfo;
 import com.app.model.SchedulerJobInfoLog;
 import com.app.model.SchedulerNotification;
+import com.app.model.SchedulerNotificationHistory;
 
 @Service
 public class JobServices {
@@ -67,6 +68,12 @@ public class JobServices {
 	public void insertJobHistoryLog(SchedulerJobInfoLog jobInfoLog) {
 		JobDao dao=sqlSession.getMapper(JobDao.class);
 		dao.insertJobHistoryLog(jobInfoLog);
+		
+	}
+	
+	public void insertNotificationHistory(SchedulerNotificationHistory schedulerNotificationHistory) {
+		JobDao dao=sqlSession.getMapper(JobDao.class);
+		dao.insertNotificationHistory(schedulerNotificationHistory);
 		
 	}
 	

@@ -6,8 +6,13 @@
 <insert id="insertJobHistoryLog" parameterType="com.app.model.SchedulerJobInfoLog" useGeneratedKeys="true" keyProperty="info_id">
 	insert scheduler_job_info_history (id,cron_expression,cron_job,job_class,job_group,job_name,repeat_time,params,url,action_type,automatic,created_date,job_result)
 	values(#{id},#{cron_expression},#{cron_job},#{job_class},#{job_group},#{job_name},#{repeat_time},#{params},#{url},#{action_type},#{automatic},now(),#{job_result})
-</insert>
+</insert> 
   
+  
+<insert id="insertNotificationHistory" parameterType="com.app.model.SchedulerNotificationHistory" useGeneratedKeys="true" keyProperty="history_id">
+	insert scheduler_notification_history (notification_id,info_id,error,message)
+	values(#{notification_id},#{info_id},#{error},#{message})
+</insert> 
 
   
 </mapper>
