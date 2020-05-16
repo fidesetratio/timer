@@ -145,9 +145,14 @@ public class CustomListeners implements TriggerListener {
 		  
 		  
 		  
-		  Date scheduleTime = triggers.get(0).getStartTime();
-		  Date nextFireTime = triggers.get(0).getNextFireTime(); 
-		  Date lastFiredTime =triggers.get(0).getPreviousFireTime();
+		  Date scheduleTime = triggers.get(0).getStartTime() != null? triggers.get(0).getStartTime() : new Date();
+		  Date nextFireTime = triggers.get(0).getNextFireTime() != null? triggers.get(0).getNextFireTime() : new Date();
+		  Date lastFiredTime =triggers.get(0).getPreviousFireTime() != null? triggers.get(0).getPreviousFireTime() :new Date();
+		  System.out.println("scheduleTime:"+triggers.get(0).getStartTime());
+		  System.out.println("nextFireTime:"+triggers.get(0).getNextFireTime());
+		  System.out.println("lastFiredTime:"+triggers.get(0).getPreviousFireTime());
+		  
+		  
 		  jobServices.updateJobInfoTime(1,scheduleTime.toString(),nextFireTime.toString(),lastFiredTime.toString(),state,jobId);
 		
 		  

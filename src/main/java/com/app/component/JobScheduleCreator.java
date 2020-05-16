@@ -1,12 +1,16 @@
 package com.app.component;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.SimpleTrigger;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
@@ -84,5 +88,20 @@ public class JobScheduleCreator {
 		factoryBean.afterPropertiesSet();
 		return factoryBean.getObject();
 	}
-
+	
+	public Trigger createOnceByDateAndTime(String triggerName, String dateTime) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");//28/09/2013 09:57:19
+		Date startTime = new Date();
+		try {
+			startTime = dateFormat.parse(dateTime);
+			System.out.println("startTime:"+startTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerName).startAt(startTime).withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionNextWithExistingCount() ).build();
+		return trigger;
+	}
+	
 }

@@ -259,7 +259,7 @@ insert into scheduler_notification_type(
 insert into scheduler_notification(notification_type_id,fromemail,toemail,subject_email,description,flag_active)
 values(1,'patartimotiustambunan@gmail.com','patartimotiustambunan@gmail','test','test',1);
 
-INSERT INTO `scheduler_job_info` (`cron_expression`, `job_class`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) VALUES ( '0 * * ? * *', 'com.app.quartz.engine.jobs.GalleryJob', 'Test_Cron', 'Sample Cron', 'Y', NULL,1,1,1);
+INSERT INTO `scheduler_job_info` (`cron_expression`, `job_class`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) VALUES ( '16/05/2020 21:24:00', 'com.app.quartz.engine.jobs.GalleryJob', 'Test_Cron2', 'Sample Cron2', 'N', NULL,1,1,1);
 
 
 commit;

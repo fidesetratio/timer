@@ -73,8 +73,14 @@ public class DefaultSchedulerService implements SchedulerService {
                               trigger = scheduleCreator.createCronTrigger(jobInfo.getJob_name(), new Date(),
                                       jobInfo.getCron_expression(), SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
                           } else {
-                              trigger = scheduleCreator.createSimpleTrigger(jobInfo.getJob_name(), new Date(),
-                                      jobInfo.getRepeat_time(), SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
+							/*
+							 * trigger = scheduleCreator.createSimpleTrigger(jobInfo.getJob_name(), new
+							 * Date(), jobInfo.getRepeat_time(),
+							 * SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
+							 */                     
+                          
+                      	  	trigger = scheduleCreator.createOnceByDateAndTime(jobInfo.getJob_name(), jobInfo.getCron_expression());
+                      	    
                           }
 
                           scheduler.scheduleJob(jobDetail, trigger);
@@ -211,8 +217,12 @@ public class DefaultSchedulerService implements SchedulerService {
                   trigger = scheduleCreator.createCronTrigger(jobInfo.getJob_name(), new Date(),
                           jobInfo.getCron_expression(), SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
               } else {
-                  trigger = scheduleCreator.createSimpleTrigger(jobInfo.getJob_name(), new Date(),
-                          jobInfo.getRepeat_time(), SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
+					/*
+					 * trigger = scheduleCreator.createSimpleTrigger(jobInfo.getJob_name(), new
+					 * Date(), jobInfo.getRepeat_time(),
+					 * SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
+					 */ 
+            	  	trigger = scheduleCreator.createOnceByDateAndTime(jobInfo.getJob_name(), jobInfo.getCron_expression());
               }
               scheduler.scheduleJob(jobDetail, trigger);
               return true;
