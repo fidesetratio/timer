@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS `scheduler_job_info`;
+DROP TABLE IF EXISTS `scheduler_job_info_history`;
 DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
 DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;
 DROP TABLE IF EXISTS QRTZ_SCHEDULER_STATE;
@@ -15,11 +16,14 @@ CREATE TABLE scheduler_job_info (
   id bigint(20) NOT NULL AUTO_INCREMENT,
   cron_expression varchar(255) DEFAULT NULL,
   cron_job varchar(255) DEFAULT 'Y',
+  cat_id int not null default 0,
   job_class varchar(255) DEFAULT NULL,
   job_group varchar(255) DEFAULT NULL,
   job_name varchar(255) DEFAULT NULL,
   repeat_time bigint(20) DEFAULT NULL,
   params varchar(255) DEFAULT NULL,
+  param0 varchar(255) DEFAULT NULL,
+  param1 varchar(255) DEFAULT NULL,
   url varchar(255) DEFAULT NULL,
   action_type int not null default 0,
   automatic int not null default 0,
@@ -31,6 +35,16 @@ CREATE TABLE scheduler_job_info (
   notification_id int not null default 0,
   PRIMARY KEY (id)
 ) ENGINE=INNODB;
+
+
+CREATE TABLE scheduler_job_info_category(
+	cat_id int not null auto_increment,
+	job_class varchar(255) DEFAULT NULL,
+	job_label varchar(255) DEFAULT NULL,
+	primary key(cat_id)
+)ENGINE=INNODB;
+
+
 
 CREATE TABLE scheduler_job_info_history (
   info_id int(10) not null auto_increment,
@@ -247,6 +261,13 @@ CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
 
 
 
+insert into scheduler_job_info_category(cat_id,job_class,job_label)
+values('1','com.app.quartz.engine.jobs.GalleryJob','GALLERY JOB');
+insert into scheduler_job_info_category(cat_id,job_class,job_label)
+values('2','com.app.quartz.engine.jobs.SimpleJob','SIMPLE JOB');
+insert into scheduler_job_info_category(cat_id,job_class,job_label)
+values('3','com.app.quartz.engine.jobs.HttpJob','HTTP');
+
 
 insert into scheduler_notification_type(
 	notification_type,
@@ -259,7 +280,15 @@ insert into scheduler_notification_type(
 insert into scheduler_notification(notification_type_id,fromemail,toemail,subject_email,description,flag_active)
 values(1,'patartimotiustambunan@gmail.com','patartimotiustambunan@gmail','test','test',1);
 
-INSERT INTO `scheduler_job_info` (`cron_expression`, `job_class`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) VALUES ( '16/05/2020 21:24:00', 'com.app.quartz.engine.jobs.GalleryJob', 'Test_Cron2', 'Sample Cron2', 'N', NULL,1,1,1);
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) 
+VALUES ( '16/05/2020 21:24:00',2, 'Test_Cron2', 'Sample Cron2', 'N', NULL,1,1,1);
+
+
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
+VALUES ( '0/5 * * * * ?',3, 'Test_Cron23', 'httpbypatar', 'Y', NULL,1,1,1,'https://gorest.co.in/public-api/users?_format=json&access-token=dggoqBMlXjB_GOGOurCY3UbO8pp5_cam1bdn');
+
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
+VALUES ( '31/05/2020 18:55:00',3, 'Test_Cron233', 'gallery001', 'N', NULL,1,1,1,'https://jsonplaceholder.typicode.com/todos/1');
 
 
 commit;

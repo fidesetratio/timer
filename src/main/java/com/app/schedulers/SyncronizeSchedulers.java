@@ -50,6 +50,7 @@ public class SyncronizeSchedulers {
 	}
 
 	public void syncronizeJobInfo(SchedulerJobInfo jobInfo) {
+		System.out.println("update it..");
 		if(schedulerServices.sinkron(jobInfo)) {
 			jobServices.updateSinkronJobInfo(1,0,0, jobInfo.getId());
 		}else {

@@ -199,6 +199,8 @@ public class DefaultSchedulerService implements SchedulerService {
 		// TODO Auto-generated method stub
 		 Scheduler scheduler = schedulerFactoryBean.getScheduler();
 	try {
+
+		System.out.println("sinkron with :"+jobInfo.getJob_class()+"jobId"+jobInfo.getId());
 		JobDetail jobDetail = JobBuilder.newJob((Class<? extends QuartzJobBean>) Class.forName(jobInfo.getJob_class().trim()))
 	
                  .withIdentity(jobInfo.getJob_name(), jobInfo.getJob_group()).build();
@@ -232,7 +234,9 @@ public class DefaultSchedulerService implements SchedulerService {
      	  System.out.println("class is not found..");
      	  logger.error("Class Not Found - {}", jobInfo.getJob_class(), e);
        } catch (SchedulerException e) {
-     	  logger.error(e.getMessage(), e);
+    	   System.out.println("error.."+jobInfo.getJob_class());
+      	  
+    	   logger.error(e.getMessage(), e);
        }
 	
 		return false;

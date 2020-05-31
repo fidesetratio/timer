@@ -55,6 +55,9 @@ public class JobScheduleCreator {
 // set job data map
 		JobDataMap jobDataMap = new JobDataMap();
 		jobDataMap.put("jobId", Long.toString(jobInfo.getId()));
+		jobDataMap.put("url",jobInfo.getUrl());
+		jobDataMap.put("param0", jobInfo.getParam0());
+		jobDataMap.put("param1", jobInfo.getParam1());
 		factoryBean.setJobDataMap(jobDataMap);
 
 		factoryBean.afterPropertiesSet();

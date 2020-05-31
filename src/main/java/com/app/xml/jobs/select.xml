@@ -4,20 +4,22 @@
 <mapper namespace='com.app.dao.JobDao'>
 
 <select id="selectAll" resultType="com.app.model.SchedulerJobInfo">
-	select * from scheduler_job_info where status_job = 1
+	select j.id,j.cron_expression,j.cron_job,j.cat_id,c.job_class,j.job_group,j.job_name,j.repeat_time,j.params,j.url,j.action_type,j.automatic,j.scheduleTime,j.nextFireTime,j.lastFireTime,j.state,j.status_job,j.notification_id,j.param0, j.param1 from scheduler_job_info j,scheduler_job_info_category c where j.status_job = 1
+	and j.cat_id = c.cat_id
 </select>
   
 <select id="selectJobById" resultType="com.app.model.SchedulerJobInfo" parameterType="long">
-	select * from scheduler_job_info where id = #{job_id}
+	select j.id,j.cron_expression,j.cron_job,j.cat_id,c.job_class,j.job_group,j.job_name,j.repeat_time,j.params,j.url,j.action_type,j.automatic,j.scheduleTime,j.nextFireTime,j.lastFireTime,j.state,j.status_job,j.notification_id,j.param0, j.param1 from scheduler_job_info j,scheduler_job_info_category c where id = #{job_id} 
+	and j.cat_id = c.cat_id
 </select>
   
     
  <select id="selectAllAutomatic" resultType="com.app.model.SchedulerJobInfo">
-	select * from scheduler_job_info where automatic = 1
+	select j.id,j.cron_expression,j.cron_job,j.cat_id,c.job_class,j.job_group,j.job_name,j.repeat_time,j.params,j.url,j.action_type,j.automatic,j.scheduleTime,j.nextFireTime,j.lastFireTime,j.state,j.status_job,j.notification_id,j.param0, j.param1 from scheduler_job_info j,scheduler_job_info_category c where 1=1
+	and j.cat_id = c.cat_id and j.automatic = 1
 </select>
   <select id="selectNotificationId" resultType="com.app.model.SchedulerNotification" parameterType="long">
   		select * from scheduler_notification n,scheduler_notification_type t where t.type_id = n.notification_type_id
   		and notification_id =  #{notification_id}
-
   </select>
 </mapper>
