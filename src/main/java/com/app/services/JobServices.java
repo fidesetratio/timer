@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.JobDao;
+import com.app.model.SchedulerJobGroup;
 import com.app.model.SchedulerJobInfo;
+import com.app.model.SchedulerJobInfoCategory;
 import com.app.model.SchedulerJobInfoLog;
 import com.app.model.SchedulerNotification;
 import com.app.model.SchedulerNotificationHistory;
@@ -24,6 +26,23 @@ public class JobServices {
 		return ( List<SchedulerJobInfo>)dao.selectAll();
 	}
 	
+	public List<SchedulerJobGroup> selectAvailableGroups(){
+		JobDao dao=sqlSession.getMapper(JobDao.class);
+		return ( List<SchedulerJobGroup>)dao.selectAvailableGroups();
+	}
+	
+	
+	public List<SchedulerJobInfoCategory> selectJobInfoCategory(){
+		JobDao dao=sqlSession.getMapper(JobDao.class);
+		return ( List<SchedulerJobInfoCategory>)dao.selectJobInfoCategory();
+
+	}
+	
+	
+	public List<SchedulerJobInfo> selectAllByGroupId(Long group_id){
+		JobDao dao=sqlSession.getMapper(JobDao.class);
+		return ( List<SchedulerJobInfo>)dao.selectAllByGroupId(group_id);
+	}
 	public List<SchedulerJobInfo> selectAllAutomatic(){
 		JobDao dao=sqlSession.getMapper(JobDao.class);
 		return ( List<SchedulerJobInfo>)dao.selectAllAutomatic();

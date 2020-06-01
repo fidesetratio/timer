@@ -24,6 +24,8 @@ public class SchedulerJobInfo {
 	    private String param1;
 	    
 	    
+	    private String job_label;
+	    
 	    private String params;
 
 	    private String url;
@@ -151,6 +153,14 @@ public class SchedulerJobInfo {
 
 		public void setParam1(String param1) {
 			this.param1 = param1;
+		}
+
+		public String getJob_label() {
+			return job_label;
+		}
+
+		public void setJob_label(String job_label) {
+			this.job_label = job_label;
 		}
 
 }

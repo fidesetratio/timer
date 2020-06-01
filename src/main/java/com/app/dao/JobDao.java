@@ -3,7 +3,9 @@ package com.app.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.app.model.SchedulerJobGroup;
 import com.app.model.SchedulerJobInfo;
+import com.app.model.SchedulerJobInfoCategory;
 import com.app.model.SchedulerJobInfoLog;
 import com.app.model.SchedulerNotification;
 import com.app.model.SchedulerNotificationHistory;
@@ -12,6 +14,11 @@ public interface JobDao {
 	
 	public List<SchedulerJobInfo> selectAll();
 	public List<SchedulerJobInfo> selectAllAutomatic();
+	public List<SchedulerJobGroup> selectAvailableGroups();
+	public List<SchedulerJobInfoCategory> selectJobInfoCategory();
+	
+	public List<SchedulerJobInfo> selectAllByGroupId(Long group_id);
+	
 	public SchedulerJobInfo selectJobById(Long job_id);
 	public SchedulerNotification selectNotificationId(Long notification_id);
 	public void updateSinkronJobInfo(Map params);

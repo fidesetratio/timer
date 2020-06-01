@@ -16,6 +16,7 @@ CREATE TABLE scheduler_job_info (
   id bigint(20) NOT NULL AUTO_INCREMENT,
   cron_expression varchar(255) DEFAULT NULL,
   cron_job varchar(255) DEFAULT 'Y',
+  group_id int not null default 0,
   cat_id int not null default 0,
   job_class varchar(255) DEFAULT NULL,
   job_group varchar(255) DEFAULT NULL,
@@ -36,6 +37,13 @@ CREATE TABLE scheduler_job_info (
   PRIMARY KEY (id)
 ) ENGINE=INNODB;
 
+
+create table scheduler_job_info_groups(
+	group_id int not null auto_increment,
+	group_name varchar(200) not null default '',
+	group_descriptions varchar(255) not null default '',
+	primary key(group_id)
+)ENGINE=INNODB;
 
 CREATE TABLE scheduler_job_info_category(
 	cat_id int not null auto_increment,
@@ -258,6 +266,10 @@ CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIG
 CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
 
 
+insert into scheduler_job_info_groups(group_name,group_descriptions) values('E-Lions','E-lions');
+insert into scheduler_job_info_groups(group_name,group_descriptions) values('Ofac-Engine','Ofac Engine');
+
+
 
 
 
@@ -280,15 +292,15 @@ insert into scheduler_notification_type(
 insert into scheduler_notification(notification_type_id,fromemail,toemail,subject_email,description,flag_active)
 values(1,'patartimotiustambunan@gmail.com','patartimotiustambunan@gmail','test','test',1);
 
-INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) 
-VALUES ( '16/05/2020 21:24:00',2, 'Test_Cron2', 'Sample Cron2', 'N', NULL,1,1,1);
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`,`group_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`) 
+VALUES ( '16/05/2020 21:24:00',2,1, 'Test_Cron2', 'Sample Cron2', 'N', NULL,1,1,1);
 
 
-INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
-VALUES ( '0/5 * * * * ?',3, 'Test_Cron23', 'httpbypatar', 'Y', NULL,1,1,1,'https://gorest.co.in/public-api/users?_format=json&access-token=dggoqBMlXjB_GOGOurCY3UbO8pp5_cam1bdn');
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`,`group_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
+VALUES ( '0/5 * * * * ?',3,1, 'Test_Cron23', 'httpbypatar', 'Y', NULL,1,1,1,'https://gorest.co.in/public-api/users?_format=json&access-token=dggoqBMlXjB_GOGOurCY3UbO8pp5_cam1bdn');
 
-INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
-VALUES ( '31/05/2020 18:55:00',3, 'Test_Cron233', 'gallery001', 'N', NULL,1,1,1,'https://jsonplaceholder.typicode.com/todos/1');
+INSERT INTO `scheduler_job_info` (`cron_expression`,`cat_id`,`group_id`, `job_group`, `job_name`, `cron_job`, `repeat_time`,`action_type`,`automatic`,`notification_id`,`url`) 
+VALUES ( '31/05/2020 18:55:00',3,1, 'Test_Cron233', 'gallery001', 'N', NULL,1,1,1,'https://jsonplaceholder.typicode.com/todos/1');
 
 
 commit;

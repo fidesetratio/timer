@@ -22,4 +22,22 @@
   		select * from scheduler_notification n,scheduler_notification_type t where t.type_id = n.notification_type_id
   		and notification_id =  #{notification_id}
   </select>
+  
+  <select id="selectAvailableGroups" resultType="com.app.model.SchedulerJobGroup">
+  		select * from scheduler_job_info_groups
+  </select>
+  
+  
+  
+<select id="selectAllByGroupId" resultType="com.app.model.SchedulerJobInfo" parameterType="long">
+	select j.id,j.cron_expression,j.cron_job,j.cat_id,c.job_class,j.job_group,c.job_label,j.job_name,j.repeat_time,j.params,j.url,j.action_type,j.automatic,j.scheduleTime,j.nextFireTime,j.lastFireTime,j.state,j.status_job,j.notification_id,j.param0, j.param1 from scheduler_job_info j,scheduler_job_info_category c where j.status_job = 1
+	and j.cat_id = c.cat_id and j.group_id = #{group_id}
+</select>
+
+
+  <select id="selectJobInfoCategory" resultType="com.app.model.SchedulerJobInfoCategory">
+  		select * from scheduler_job_info_category
+  </select>
+  
+  
 </mapper>
