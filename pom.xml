@@ -12,7 +12,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
-		<ibatis.version>3.3.1</ibatis.version>
+		<ibatis.version>3.5.6</ibatis.version>
   	<ibatis.spring.version>1.1.1</ibatis.spring.version>
 	</properties>
 	<dependencies>
